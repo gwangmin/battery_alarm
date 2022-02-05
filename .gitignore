@@ -1,0 +1,5 @@
+.DS_Store
+.vscode
+battery_alarm.app
+state
+batt_percent.log
