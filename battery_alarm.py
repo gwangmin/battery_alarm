@@ -3,12 +3,13 @@ import os
 import pickle
 import re
 import sys
+import datetime
 
 # settings
 app_name = 'battery_alarm'
-base_dir = '/' + app_name + '/'
+base_dir = os.environ['HOME'] + '/portal/' + app_name + '/'
 state_file = base_dir + 'state'
-batt_log_file = base_dir + 'batt_percent.log'
+batt_log_file = base_dir + 'm1pro_batt_percent.log'
 
 def alarm(batt_percent):
     '''
@@ -34,7 +35,7 @@ def read_state():
     Read state
     * state: 배터리가 경고 범위 안일 때 알람이 매 분 울리지 않고 한 번만 울리도록 조절하는 변수(state)
 
-    return: state(default True)
+    return: state. default True(alarm available)
     '''
     if os.path.exists(state_file):
         with open(state_file, 'rb') as f:
@@ -44,7 +45,7 @@ def read_state():
 
 def batt_check():
     '''
-    알람 처리
+    배터리 잔량 체크
     '''
     percent = get_batt_percent()
     log_batt_percent(percent)
@@ -62,7 +63,7 @@ def log_batt_percent(batt_percent):
     배터리 퍼센트 로그 찍기
     '''
     with open(batt_log_file, 'a') as f:
-        f.write(str(batt_percent) + '\n')
+        f.write(str(datetime.datetime.now()) + ':\t' + str(batt_percent) + '%\n')
 
 def save_state(state):
     '''
@@ -71,9 +72,13 @@ def save_state(state):
     with open(state_file, 'wb') as f:
         pickle.dump(state, f)
 
-# 명령행 인자
-what = sys.argv[1]
-if what == 'alarm':
-    batt_check()
-elif what == 'state':
-    print(read_state())
+def main():
+    # 명령행 인자
+    what = sys.argv[1]
+    if what == 'check':
+        batt_check()
+    elif what == 'state':
+        print(read_state())
+
+if __name__ == '__main__':
+    main()
