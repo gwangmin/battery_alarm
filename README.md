@@ -9,4 +9,4 @@ and write battery percent log.
 - python battery_alarm.py state: battery check and alarm, battery percent log
 - python battery_alarm.py alarm: state check
 
-* * * * * /python /battery_alarm/battery_alarm.py alarm
+* * * * * python /battery_alarm/battery_alarm.py check
