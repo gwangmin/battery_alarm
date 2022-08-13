@@ -7,7 +7,7 @@ import datetime
 
 # settings
 app_name = 'battery_alarm'
-base_dir = os.environ['HOME'] + '/portal/' + app_name + '/'
+base_dir = os.environ['HOME'] + '/' + app_name + '/'
 state_file = base_dir + 'state'
 batt_log_file = base_dir + 'm1pro_batt_percent.log'
 
