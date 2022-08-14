@@ -9,7 +9,7 @@ import datetime
 app_name = 'battery_alarm'
 base_dir = os.environ['HOME'] + '/' + app_name + '/'
 state_file = base_dir + 'state'
-batt_log_file = base_dir + 'm1pro_batt_percent.log'
+batt_log_file = base_dir + 'batt_percent.log'
 
 def alarm(batt_percent):
     '''
@@ -48,7 +48,7 @@ def batt_check():
     배터리 잔량 체크
     '''
     percent = get_batt_percent()
-    log_batt_percent(percent)
+    # log_batt_percent(percent)
     state = read_state()
     if (percent <= 20) or (80 <= percent):
         if state:
